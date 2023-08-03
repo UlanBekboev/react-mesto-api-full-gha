@@ -1,0 +1,11 @@
+.popup__container_type_infotool {
+  gap: 32px;
+}
+
+@media screen and (max-width: 500px) {
+  .popup__container_type_infotool {
+    max-width: 280px;
+    height: 308px;
+    gap: 40px;
+  }
+}

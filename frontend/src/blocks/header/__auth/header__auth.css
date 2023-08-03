@@ -1,0 +1,35 @@
+.header__auth {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin: 0;
+  list-style: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .header__auth {
+    gap: 16px;
+    padding-right: 27px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header__auth {
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 27px;
+    text-align: end;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .header__auth {
+    padding-left: 27px;
+}
+}
+
+@media screen and (max-width: 439px) {
+  .header__auth {
+    text-align: start;
+  }
+}

@@ -1,0 +1,11 @@
+.popup__signup-title {
+  max-width: 358px;
+  text-align: center;
+  margin: 0;
+}
+
+@media screen and (max-width: 500px) {
+  .popup__signup-title {
+    max-width: 244px;
+  }
+}
