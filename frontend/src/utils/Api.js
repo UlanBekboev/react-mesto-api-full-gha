@@ -101,7 +101,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'http://localhost:3001',
+  url: 'https://api.discover.nomoreparties.co',
   headers: {
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
