@@ -21,10 +21,10 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.3.2",
     "validator": "^13.9.0",
-    "winston": "^3.10.0"
+    "winston": "^3.10.0",
+    "cors": "^2.8.5"
   },
   "devDependencies": {
-    "cors": "^2.8.5",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",

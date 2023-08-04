@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const NotFoundError = require('./errors/not-found-err');
 const auth = require('./middlewares/auth');
 const { login, createUser } = require('./controllers/users');
@@ -9,7 +10,6 @@ const rootRouter = require('./routes/index');
 const { SERVER_PORT, DB } = require('./utils/config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { signIn, signUp } = require('./middlewares/validations');
-const cors = require('./middlewares/cors');
 const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
@@ -24,7 +24,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
 
-app.use(cors);
+app.use(cors(
+  { origin: ['http://localhost:3000', 'http://localhost:3000', 'http://discover.nomoreparties.co', 'https://discover.nomoreparties.co'] },
+));
 
 app.post('/signin', signIn, login);
 app.post('/signup', signUp, createUser);
