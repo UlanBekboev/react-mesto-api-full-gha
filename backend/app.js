@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
 
 app.use(cors(
-  { origin: ['http://localhost:3000', 'http://localhost:3000', 'http://discover.nomoreparties.co', 'https://discover.nomoreparties.co'] },
+  { origin: ['http://localhost:3000', 'https://localhost:3000', 'http://discover.nomoreparties.co', 'https://discover.nomoreparties.co'] },
 ));
 
 app.post('/signin', signIn, login);
