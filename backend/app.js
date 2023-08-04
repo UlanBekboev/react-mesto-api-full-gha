@@ -1,10 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
-const { errors, Joi, celebrate } = require('celebrate');
-const validator = require('validator');
+const { errors } = require('celebrate');
 const NotFoundError = require('./errors/not-found-err');
-const BadRequestError = require('./errors/bad-request-err');
 const auth = require('./middlewares/auth');
 const { login, createUser } = require('./controllers/users');
 const rootRouter = require('./routes/index');
@@ -27,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors);
 
-app.use(requestLogger)
+app.use(requestLogger);
 
 app.post('/signin', signIn, login);
 app.post('/signup', signUp, createUser);
