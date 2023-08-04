@@ -4,7 +4,7 @@ const { // eslint-disable-next-line
   NODE_ENV, JWT_SECRET, DB_HOST, PORT, SECRET,
 } = process.env;
 
-const DEV_SECRET = 'SECRETSECRETSECRET';
+const DEV_SECRET = '18aff85b4d9b2cf750c6e130ac8f7b2edb5d6dc590153b795f95e59cd0d396ee';
 const DEV_DB_HOST = 'mongodb://127.0.0.1:27017/mestodb';
 const DEV_PORT = 3001;
 

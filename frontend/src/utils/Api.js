@@ -14,6 +14,7 @@ class Api {
   getInitialCards() {
     const jwt = localStorage.getItem('jwt');
     return fetch(`${this._url}/cards`, {
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${jwt}`,
@@ -24,6 +25,7 @@ class Api {
 
   addCard(data, jwt) {
     return fetch(`${this._url}/cards`, {
+      credentials: 'include',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,6 +42,7 @@ class Api {
   handleDeleteCard(cardId, jwt) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${jwt}`,
@@ -51,6 +54,7 @@ class Api {
   changeLikeCardStatus(cardId, isLiked, jwt) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: `${!isLiked ? 'DELETE' : 'PUT'}`,
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${jwt}`,
@@ -62,6 +66,7 @@ class Api {
   getUserInfo() {
     const jwt = localStorage.getItem('jwt');
     return fetch(`${this._url}/users/me`, {
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${jwt}`,
@@ -73,6 +78,7 @@ class Api {
   setUserInfo(data, jwt) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${jwt}`,
@@ -88,6 +94,7 @@ class Api {
   setUserAvatar(data, jwt) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${jwt}`,
