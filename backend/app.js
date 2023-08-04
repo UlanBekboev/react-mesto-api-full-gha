@@ -22,11 +22,12 @@ mongoose.connect(DB, {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(requestLogger);
 
 app.use(cors(
   { origin: ['http://localhost:3000', 'https://localhost:3000', 'http://discover.nomoreparties.co', 'https://discover.nomoreparties.co'] },
 ));
+
+app.use(requestLogger);
 
 app.post('/signin', signIn, login);
 app.post('/signup', signUp, createUser);
