@@ -13,6 +13,17 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { signIn, signUp } = require('./middlewares/validations');
 const errorHandler = require('./middlewares/errorHandler');
 
+const corsOptions = {
+  origin: [
+    'https://praktikum.tk',
+    'http://praktikum.tk',
+    'http://localhost:3000',
+    'https://localhost:3000',
+    'http://discover.nomoreparties.co',
+    'https://discover.nomoreparties.co',
+  ],
+};
+
 const app = express();
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -21,6 +32,8 @@ const limiter = rateLimit({
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 app.use(helmet());
+app.use(cors(corsOptions));
+app.use(limiter);
 
 mongoose.connect(DB, {
   useNewUrlParser: true,
@@ -30,16 +43,12 @@ mongoose.connect(DB, {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors(
-  { origin: ['http://localhost:3000', 'https://localhost:3000', 'http://discover.nomoreparties.co', 'https://discover.nomoreparties.co'] },
-));
-
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-app.use(limiter);
+
 app.use(requestLogger);
 
 app.post('/signin', signIn, login);
