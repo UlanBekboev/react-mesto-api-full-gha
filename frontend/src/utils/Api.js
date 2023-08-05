@@ -14,10 +14,9 @@ class Api {
   getInitialCards() {
     const jwt = localStorage.getItem('jwt');
     return fetch(`${this._url}/cards`, {
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${jwt}`,
+        'Authorization': `Bearer ${jwt}`,
       }
     })
       .then(res => this._response(res));
@@ -25,11 +24,10 @@ class Api {
 
   addCard(data, jwt) {
     return fetch(`${this._url}/cards`, {
-      credentials: 'include',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${jwt}`,
+        'Authorization': `Bearer ${jwt}`,
       },
       body: JSON.stringify({
         name: data.name,
@@ -42,10 +40,9 @@ class Api {
   handleDeleteCard(cardId, jwt) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: 'DELETE',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${jwt}`,
+        'Authorization': `Bearer ${jwt}`,
       }
     })
     .then(res => this._response(res));
@@ -54,10 +51,9 @@ class Api {
   changeLikeCardStatus(cardId, isLiked, jwt) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: `${!isLiked ? 'DELETE' : 'PUT'}`,
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${jwt}`,
+        'Authorization': `Bearer ${jwt}`,
       }
     })
     .then(res => this._response(res));
@@ -66,10 +62,9 @@ class Api {
   getUserInfo() {
     const jwt = localStorage.getItem('jwt');
     return fetch(`${this._url}/users/me`, {
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${jwt}`,
+        'Authorization': `Bearer ${jwt}`,
       }
     })
       .then(res => this._response(res));
@@ -78,10 +73,9 @@ class Api {
   setUserInfo(data, jwt) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${jwt}`,
+        'Authorization': `Bearer ${jwt}`,
       },
       body: JSON.stringify({
         name: data.name,
@@ -94,10 +88,9 @@ class Api {
   setUserAvatar(data, jwt) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        authorization: `Bearer ${jwt}`,
+        'Authorization': `Bearer ${jwt}`,
       },
       body: JSON.stringify({
         avatar: data.avatar
@@ -109,8 +102,9 @@ class Api {
 
 const api = new Api({
   url: 'https://api.discover.nomoreparties.co',
+  //url: 'http://localhost:3001',
   headers: {
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
   }
 });

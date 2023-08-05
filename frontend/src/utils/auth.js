@@ -6,11 +6,11 @@ function checkResponse(res) {
 }
 
 export const BASE_URL = "https://api.discover.nomoreparties.co";
+//export const BASE_URL = "http://localhost:3001";
 
 export function register({ email, password }) {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
-    credentials: 'include',
     headers: {
       "Accept": 'application/json',
       "Content-Type": "application/json",
@@ -22,7 +22,6 @@ export function register({ email, password }) {
 export function authorize({ email, password }) {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
-    credentials: 'include',
     headers: {
       "Accept": 'application/json',
       "Content-Type": "application/json",
@@ -40,11 +39,10 @@ export function authorize({ email, password }) {
 export function checkToken(jwt) {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
-    credentials: 'include',
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
-      'Authorization': `Bearer ${jwt}`,
+      "Authorization": `Bearer ${jwt}`,
     },
   }).then(checkResponse);
 }

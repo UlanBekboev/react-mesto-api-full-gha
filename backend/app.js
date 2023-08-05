@@ -31,7 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors(
-  { origin: ['http://localhost:3000', 'https://localhost:3000', 'http://discover.nomoreparties.co', 'https://discover.nomoreparties.co'], credentials: true, maxAge: 36 },
+  { origin: ['http://localhost:3001', 'https://localhost:3001', 'http://discover.nomoreparties.co', 'https://discover.nomoreparties.co'] },
 ));
 
 app.get('/crash-test', () => {
