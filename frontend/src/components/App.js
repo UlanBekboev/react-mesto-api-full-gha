@@ -64,15 +64,28 @@ function App() {
   };
 
   useEffect(() => {
-    Promise.all([api.getInitialCards(), api.getUserInfo()])
-    .then(([initialCards, userData]) => {
-      setCurrentUser(userData);
-      setCards(initialCards);
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    });
-  }, []);
+    const jwt = localStorage.getItem("jwt");
+      if (jwt) {
+        auth.checkToken(jwt)
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+            setEmailName(res.email);
+            navigate("/", {replace: true});
+          }
+        }).catch((err) => {
+          console.error(err);
+        });
+      };
+      Promise.all([api.getInitialCards(), api.getUserInfo()])
+      .then(([initialCards, userData]) => {
+        setCurrentUser(userData);
+        setCards(initialCards);
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
+    }, [loggedIn, navigate]);
 
   const handleUpdateAvatar = (data) => {
     setIsLoading(true);
@@ -186,25 +199,12 @@ function App() {
     }
 
     useEffect(() => {
-      const jwt = localStorage.getItem("jwt");
-      if (jwt) {
-        auth.checkToken(jwt)
-        .then((res) => {
-          if (res) {
-            setLoggedIn(true);
-            setEmailName(res.email);
-          }
-        }).catch((err) => {
-          console.error(err);
-        });
-      };
-    }, []);
-
-     useEffect(() => {
       if (loggedIn) {
-        navigate("/", {replace: true});
+        navigate('/', { replace: true });
+      } else {
+        navigate('/sign-in', { replace: true });
       }
-    }, [loggedIn, navigate]); 
+    }, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
