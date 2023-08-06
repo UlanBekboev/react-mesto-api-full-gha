@@ -66,6 +66,20 @@ function App() {
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
       if (jwt) {
+        Promise.all([api.getInitialCards(), api.getUserInfo()])
+        .then(([cardData, userData]) => {
+          setCurrentUser(userData);
+          setCards(cardData);
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
+      }
+    }, [loggedIn]);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+      if (jwt) {
         auth.checkToken(jwt)
         .then((res) => {
           if (res) {
@@ -74,18 +88,11 @@ function App() {
             navigate("/", {replace: true});
           }
         }).catch((err) => {
+          localStorage.removeItem("jwt");
           console.error(err);
         });
       };
-      Promise.all([api.getInitialCards(), api.getUserInfo()])
-      .then(([initialCards, userData]) => {
-        setCurrentUser(userData);
-        setCards(initialCards);
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      });
-    }, [loggedIn, navigate]);
+    }, [navigate]);
 
   const handleUpdateAvatar = (data) => {
     setIsLoading(true);
@@ -198,13 +205,13 @@ function App() {
       navigate('/sign-in', {replace: true});
     }
 
-    useEffect(() => {
+    /* useEffect(() => {
       if (loggedIn) {
         navigate('/', { replace: true });
       } else {
         navigate('/sign-in', { replace: true });
       }
-    }, [loggedIn]);
+    }, [loggedIn]); */
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

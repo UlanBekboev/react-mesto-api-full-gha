@@ -5,8 +5,8 @@ function checkResponse(res) {
   return Promise.reject(res.status);
 }
 
-const BASE_URL = "https://api.discover.nomoreparties.co";
-//const BASE_URL = "http://localhost:3001";
+//const BASE_URL = "https://api.discover.nomoreparties.co";
+const BASE_URL = "http://localhost:3000";
 
 export function register({ email, password }) {
   return fetch(`${BASE_URL}/signup`, {

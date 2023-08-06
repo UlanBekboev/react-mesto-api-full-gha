@@ -1,7 +1,6 @@
 class Api {
   constructor(options) {
     this._url = options.url;
-    this._headers = options.headers;
   }
   
   _response(res) {
@@ -101,12 +100,8 @@ class Api {
 }
 
 const api = new Api({
-  url: 'https://api.discover.nomoreparties.co',
-  //url: 'http://localhost:3001',
-  headers: {
-    "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
-    'Content-Type': 'application/json'
-  }
+  //url: 'https://api.discover.nomoreparties.co',
+  url: 'http://localhost:3000',
 });
 
 export default api;
