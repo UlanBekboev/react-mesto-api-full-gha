@@ -17,8 +17,8 @@ const corsOptions = {
   origin: [
     'https://praktikum.tk',
     'http://praktikum.tk',
-    'http://localhost:3001',
-    'https://localhost:3001',
+    'http://localhost:3000',
+    'https://localhost:3000',
     'http://discover.nomoreparties.co',
     'https://discover.nomoreparties.co',
   ],
