@@ -19,8 +19,8 @@ const corsOptions = {
     'http://praktikum.tk',
     'http://localhost:3001',
     'https://localhost:3001',
-    'http://discover.nomoreparties.co/',
-    'https://discover.nomoreparties.co/',
+    'http://discover.nomoreparties.co',
+    'https://discover.nomoreparties.co',
   ],
 };
 
