@@ -64,19 +64,21 @@ function App() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('userId');
-    if (token) {
-      api
-        .getAppInfo()
-        .then(([cardData, userData]) => {
+    const loadData = async () => {
+      try {
+        const token = localStorage.getItem('userId');
+        if (token) {
+          const [cardData, userData] = await api.getAppInfo();
           setCurrentUser(userData);
           setCards(cardData);
-        })
-        .catch((err) => {
-          console.log(`Ошибка: ${err}`);
-        });
-    } 
-  }, [loggedIn]); 
+        }
+      } catch (err) {
+        console.log(`Ошибка: ${err}`);
+      }
+    };
+  
+    loadData();
+  }, [loggedIn]);
 
   useEffect(() => {
     const token = localStorage.getItem('userId');
