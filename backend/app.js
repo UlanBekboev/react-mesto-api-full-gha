@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 const NotFoundError = require('./errors/not-found-err');
 const auth = require('./middlewares/auth');
@@ -22,6 +23,8 @@ const corsOptions = {
     'http://discover.nomoreparties.co',
     'https://discover.nomoreparties.co',
   ],
+  credentials: true,
+  maxAge: 60,
 };
 
 const app = express();
@@ -50,6 +53,8 @@ app.get('/crash-test', () => {
 });
 
 app.use(requestLogger);
+
+app.use(cookieParser());
 
 app.post('/signin', signIn, login);
 app.post('/signup', signUp, createUser);

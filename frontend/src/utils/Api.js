@@ -10,89 +10,83 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
+  getAppInfo() {
+    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
+  }
+
   getInitialCards() {
-    const jwt = localStorage.getItem('jwt');
     return fetch(`${this._url}/cards`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${jwt}`,
-      }
+      credentials: 'include',
     })
       .then(res => this._response(res));
   }
 
-  addCard(data, jwt) {
+  addCard({ name, link }) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${jwt}`,
       },
       body: JSON.stringify({
-        name: data.name,
-        link: data.link
-      })
+        name,
+        link,
+      }),
     })
     .then(res => this._response(res));
   }
 
-  handleDeleteCard(cardId, jwt) {
+  handleDeleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${jwt}`,
-      }
+      credentials: 'include',
     })
     .then(res => this._response(res));
   }
 
-  changeLikeCardStatus(cardId, isLiked, jwt) {
+  changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: `${!isLiked ? 'DELETE' : 'PUT'}`,
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${jwt}`,
       }
     })
     .then(res => this._response(res));
   }
 
   getUserInfo() {
-    const jwt = localStorage.getItem('jwt');
     return fetch(`${this._url}/users/me`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${jwt}`,
-      }
+      credentials: 'include',
+      method: 'GET',
     })
       .then(res => this._response(res));
   }
 
-  setUserInfo(data, jwt) {
+  setUserInfo({ name, about }) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${jwt}`,
       },
       body: JSON.stringify({
-        name: data.name,
-        about: data.about,
-      })
+        name,
+        about,
+      }),
     })
       .then(res => this._response(res));
   }
 
-  setUserAvatar(data, jwt) {
+  setUserAvatar({ avatar }) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${jwt}`,
       },
       body: JSON.stringify({
-        avatar: data.avatar
+        avatar,
       })
     })
       .then(res => this._response(res));
@@ -100,8 +94,8 @@ class Api {
 }
 
 const api = new Api({
-  url: 'https://api.discover.nomoreparties.co',
-  //url: 'http://localhost:3000',
+  //url: 'https://api.discover.nomoreparties.co',
+  url: 'http://localhost:3000',
 });
 
 export default api;

@@ -48,7 +48,19 @@ module.exports.login = (req, res, next) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', {
         expiresIn: '7d',
       });
-      return res.send({ token });
+      res
+        .cookie('jwt', token, {
+          maxage: 3600000,
+          httpOnly: true,
+          sameSite: true,
+        })
+        .send({
+          email: user.email,
+          _id: user._id,
+          name: user.name,
+          about: user.about,
+          avatar: user.avatar,
+        });
     })
     .catch(next);
 };
