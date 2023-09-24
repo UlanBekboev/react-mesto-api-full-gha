@@ -94,8 +94,8 @@ class Api {
 }
 
 const api = new Api({
-  //url: 'https://api.discover.nomoreparties.co',
-  url: 'http://localhost:3000',
+  url: 'https://api.discover.nomoreparties.co',
+  //url: 'http://localhost:3000',
 });
 
 export default api;
