@@ -8,8 +8,8 @@ const {
   getUsers, getUser, updateAvatar, updateUser, getProfile,
 } = require('../controllers/users');
 
-router.get('/', getUsers);
 router.get('/me', getProfile);
+router.get('/', getUsers);
 
 router.get('/:id', userIdValidation, getUser);
 
