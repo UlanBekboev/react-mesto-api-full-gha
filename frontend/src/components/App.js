@@ -192,6 +192,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        setIsRegistrationSuccessful(false);
         oninfoTooltip();
       });
     }
