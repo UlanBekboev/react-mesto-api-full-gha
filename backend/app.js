@@ -14,7 +14,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { signIn, signUp } = require('./middlewares/validations');
 const errorHandler = require('./middlewares/errorHandler');
 
-const corsOptions = {
+/* const corsOptions = {
   origin: [
     'https://praktikum.tk',
     'http://praktikum.tk',
@@ -25,7 +25,7 @@ const corsOptions = {
   ],
   credentials: true,
   maxAge: 60,
-};
+}; */
 
 const app = express();
 const limiter = rateLimit({
@@ -35,7 +35,7 @@ const limiter = rateLimit({
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 app.use(helmet());
-app.use(cors(corsOptions));
+app.use(cors(/* corsOptions */));
 app.use(limiter);
 
 mongoose.connect(DB, {
